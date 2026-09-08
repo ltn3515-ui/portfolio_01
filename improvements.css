@@ -88,15 +88,30 @@ p, dd { color: var(--muted-strong); }
 .ai-workflow { background: #eef2fb; max-width: none; padding-left: max(24px, calc((100% - var(--max))/2)); padding-right: max(24px, calc((100% - var(--max))/2)); }
 .ai-workflow-intro { max-width: 760px; margin: 28px 0 50px auto; font-size: 20px; line-height: 1.7; }
 .ai-workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.ai-workflow-grid article { position: relative; min-height: 265px; padding: 28px; border: 1px solid #bfc9df; background: #f8faff; }
+.ai-workflow-grid article { --spot-x: 50%; --spot-y: 50%; position: relative; min-height: 265px; padding: 28px; overflow: hidden; border: 1px solid #bfc9df; background: #f8faff; isolation: isolate; transition: transform .32s cubic-bezier(.2,.8,.2,1), border-color .32s, box-shadow .32s; }
+.ai-workflow-grid article::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: 0; pointer-events: none; background: radial-gradient(240px circle at var(--spot-x) var(--spot-y), rgba(47,107,255,.18), rgba(47,107,255,.055) 42%, transparent 72%); transition: opacity .28s ease; }
+.ai-workflow-grid article:hover { transform: translateY(-6px); border-color: var(--blue); box-shadow: 0 18px 38px rgba(34,63,126,.14); }
+.ai-workflow-grid article:hover::before { opacity: 1; }
 .ai-workflow-grid article > span { position: absolute; top: 24px; right: 24px; color: var(--blue); font-size: 12px; font-weight: 900; }
 .ai-workflow-grid article > b { color: var(--blue); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 .ai-workflow-grid h3 { margin: 22px 0 12px; font-size: 23px; line-height: 1.35; }
 .ai-workflow-grid p { margin: 0 0 20px; font-size: 15px; line-height: 1.65; }
 .ai-workflow-grid small { display: block; margin-top: auto; padding-top: 15px; border-top: 1px solid #d5dceb; color: #5d6470; font-size: 12px; line-height: 1.65; }
+.ai-workflow-grid small i { display: block; font-style: normal; transition: color .25s ease, transform .25s ease, font-weight .25s ease; }
+.ai-workflow-grid .role-ai { color: #7a8496; }
+.ai-workflow-grid .role-me { color: #5d6470; }
+.ai-workflow-grid article:hover .role-ai { color: #4c78da; transform: translateX(3px); }
+.ai-workflow-grid article:hover .role-me { color: var(--blue); font-weight: 800; transform: translateX(7px); transition-delay: .1s; }
+.ai-workflow-grid.is-ready article { opacity: 0; transform: translateY(24px); }
+.ai-workflow-grid.is-ready article.is-revealed { opacity: 1; transform: translateY(0); transition: opacity .58s ease, transform .58s cubic-bezier(.2,.8,.2,1), border-color .32s, box-shadow .32s; }
+.ai-workflow-grid.is-ready article.is-revealed:hover { transform: translateY(-6px); }
 .ai-principle { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 14px; padding: 28px; background: var(--ink); color: #fff; }
 .ai-principle strong { font-size: clamp(22px, 3vw, 38px); }
 .ai-principle p { margin: 0; color: #d7d7d1; }
+
+/* Show the full MIO character sheet without desktop cropping. */
+.pack figure.wide { align-self: start; }
+.pack figure.wide img { width: 100%; height: auto; max-height: none; aspect-ratio: auto; object-fit: contain; object-position: top center; }
 
 /* Usability */
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
@@ -137,4 +152,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 
 @media (prefers-reduced-motion: reduce) {
   .hero-art img { animation: none; }
+  .ai-workflow-grid.is-ready article { opacity: 1; transform: none; }
+  .ai-workflow-grid article, .ai-workflow-grid article::before, .ai-workflow-grid small i { transition: none; }
 }

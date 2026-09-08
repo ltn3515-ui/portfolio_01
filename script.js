@@ -6,11 +6,34 @@ addEventListener('scroll',()=>gnb.classList.toggle('scrolled',scrollY>40),{passi
 const links=[...nav.querySelectorAll('a')];document.querySelectorAll('main section[id]').forEach(s=>new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const activeId=e.target.id==='ai-media'?'ai-workflow':e.target.id;links.forEach(a=>a.classList.toggle('active',a.hash===`#${activeId}`))}}),{rootMargin:'-45% 0px -45%'}).observe(s));
 document.querySelectorAll('.acc').forEach(item=>item.querySelector('button').addEventListener('click',()=>{const open=!item.classList.contains('open');document.querySelectorAll('.acc').forEach(x=>{x.classList.remove('open');x.querySelector('button').setAttribute('aria-expanded','false')});item.classList.toggle('open',open);item.querySelector('button').setAttribute('aria-expanded',open)}));
 const toast=document.querySelector('#toast');document.querySelector('#copy').addEventListener('click',()=>{toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)});
-if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){gsap.registerPlugin(ScrollTrigger);gsap.from('.hero-copy>*',{y:24,opacity:0,duration:.7,stagger:.08,ease:'power3.out'});gsap.from('.hero-art',{scale:.96,opacity:0,duration:.9});gsap.utils.toArray('.section').forEach(s=>{const t=[...s.querySelectorAll('header,.intro,.skills>*,.project,.board>*,.ai-workflow-intro,.ai-workflow-grid>*,.ai-principle,.mio-top,.pack>*,.pipeline,.episodes>*,.acc')];if(t.length)gsap.from(t,{y:28,opacity:0,duration:.7,stagger:.06,ease:'power2.out',scrollTrigger:{trigger:s,start:'top 82%',once:true}})})}
+if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){gsap.registerPlugin(ScrollTrigger);gsap.from('.hero-copy>*',{y:24,opacity:0,duration:.7,stagger:.08,ease:'power3.out'});gsap.from('.hero-art',{scale:.96,opacity:0,duration:.9});gsap.utils.toArray('.section').forEach(s=>{const t=[...s.querySelectorAll('header,.intro,.skills>*,.project,.board>*,.ai-workflow-intro,.ai-principle,.mio-top,.pack>*,.pipeline,.episodes>*,.acc')];if(t.length)gsap.from(t,{y:28,opacity:0,duration:.7,stagger:.06,ease:'power2.out',scrollTrigger:{trigger:s,start:'top 82%',once:true}})})}
 
-// Desktop custom cursor and subtle card tilt interaction.
 const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+
+// AI workflow: sequential reveal, cursor spotlight, and AI/ME role emphasis.
+const workflowGrid=document.querySelector('.ai-workflow-grid');
+if(workflowGrid){
+  const workflowCards=[...workflowGrid.querySelectorAll('article')];
+  if(!reducedMotion.matches){
+    workflowGrid.classList.add('is-ready');
+    const revealWorkflow=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      workflowCards.forEach((card,index)=>setTimeout(()=>card.classList.add('is-revealed'),index*100));
+      revealWorkflow.disconnect();
+    }),{threshold:.18});
+    revealWorkflow.observe(workflowGrid);
+  }
+  if(finePointer.matches){
+    workflowCards.forEach(card=>card.addEventListener('pointermove',event=>{
+      const rect=card.getBoundingClientRect();
+      card.style.setProperty('--spot-x',`${event.clientX-rect.left}px`);
+      card.style.setProperty('--spot-y',`${event.clientY-rect.top}px`);
+    },{passive:true}));
+  }
+}
+
+// Desktop custom cursor and subtle card tilt interaction.
 if(finePointer.matches&&!reducedMotion.matches){
   const cursor=document.createElement('div');
   cursor.className='custom-cursor';
