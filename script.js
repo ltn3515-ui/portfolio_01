@@ -5,7 +5,52 @@ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classLi
 addEventListener('scroll',()=>gnb.classList.toggle('scrolled',scrollY>40),{passive:true});
 const links=[...nav.querySelectorAll('a')];document.querySelectorAll('main section[id]').forEach(s=>new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const activeId=e.target.id==='ai-media'?'ai-workflow':e.target.id;links.forEach(a=>a.classList.toggle('active',a.hash===`#${activeId}`))}}),{rootMargin:'-45% 0px -45%'}).observe(s));
 document.querySelectorAll('.acc').forEach(item=>item.querySelector('button').addEventListener('click',()=>{const open=!item.classList.contains('open');document.querySelectorAll('.acc').forEach(x=>{x.classList.remove('open');x.querySelector('button').setAttribute('aria-expanded','false')});item.classList.toggle('open',open);item.querySelector('button').setAttribute('aria-expanded',open)}));
-const toast=document.querySelector('#toast');document.querySelector('#copy').addEventListener('click',()=>{toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)});
+const toast=document.querySelector('#toast');
+const copyButton=document.querySelector('#copy');
+const copyPrimary=copyButton.querySelector('.contact-email-primary');
+const copySecondary=copyButton.querySelector('.contact-email-secondary');
+let copyResetTimer;
+const fallbackCopy=text=>{
+  const field=document.createElement('textarea');
+  field.value=text;
+  field.setAttribute('readonly','');
+  field.style.position='fixed';
+  field.style.opacity='0';
+  document.body.appendChild(field);
+  field.select();
+  const copied=document.execCommand('copy');
+  field.remove();
+  if(!copied)throw new Error('copy failed');
+};
+copyButton.addEventListener('click',async()=>{
+  const email='ltn3515@gmail.com';
+  let copied=false;
+  try{
+    if(navigator.clipboard&&window.isSecureContext){
+      await navigator.clipboard.writeText(email);
+    }else{
+      fallbackCopy(email);
+    }
+    copied=true;
+  }catch(error){
+    try{fallbackCopy(email);copied=true}catch(fallbackError){copied=false}
+  }
+
+  clearTimeout(copyResetTimer);
+  copyButton.classList.toggle('is-copied',copied);
+  copyButton.classList.toggle('copy-failed',!copied);
+  copyPrimary.textContent=copied?'EMAIL COPIED! ✓':'복사하지 못했어요';
+  copySecondary.textContent=copied?'메일 앱에 붙여넣어 주세요':'아래 이메일 주소를 직접 눌러주세요';
+  toast.textContent=copied?'이메일 주소가 복사되었습니다.':'자동 복사가 차단되었습니다.';
+  toast.classList.add('show');
+
+  copyResetTimer=setTimeout(()=>{
+    copyButton.classList.remove('is-copied','copy-failed');
+    copyPrimary.textContent="LET'S BUILD SOMETHING →";
+    copySecondary.textContent='Email · ltn3515@gmail.com';
+    toast.classList.remove('show');
+  },2200);
+});
 if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){gsap.registerPlugin(ScrollTrigger);gsap.from('.hero-copy>*',{y:24,opacity:0,duration:.7,stagger:.08,ease:'power3.out'});gsap.from('.hero-art',{scale:.96,opacity:0,duration:.9});gsap.utils.toArray('.section').forEach(s=>{const t=[...s.querySelectorAll('header,.intro,.skills>*,.project,.board>*,.ai-workflow-intro,.ai-principle,.mio-top,.pack>*,.pipeline,.episodes>*,.acc')];if(t.length)gsap.from(t,{y:28,opacity:0,duration:.7,stagger:.06,ease:'power2.out',scrollTrigger:{trigger:s,start:'top 82%',once:true}})})}
 
 const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
