@@ -32,9 +32,9 @@
     <th>Character IP · AI Creative</th>
   </tr>
   <tr>
-    <td><img src="./docs/images/portfolio-hero.jpg" alt="현장 경험과 디지털 전환을 소개하는 포트폴리오 히어로 화면" width="320" /></td>
-    <td><img src="./docs/images/portfolio-projects.jpg" alt="모여라 프로젝트가 표시된 Selected Projects 화면" width="320" /></td>
-    <td><img src="./docs/images/portfolio-character.jpg" alt="뭉치 캐릭터 IP 프로젝트 화면" width="320" /></td>
+    <td><img src="./portfolio-hero.jpg" alt="현장 경험과 디지털 전환을 소개하는 포트폴리오 히어로 화면" width="320" /></td>
+    <td><img src="./portfolio-projects.jpg" alt="모여라 프로젝트가 표시된 Selected Projects 화면" width="320" /></td>
+    <td><img src="./portfolio-character.jpg" alt="뭉치 캐릭터 IP 프로젝트 화면" width="320" /></td>
   </tr>
 </table>
 
@@ -161,13 +161,17 @@ portfolio_01/
 ├── my.png                           # 프로필 이미지
 ├── instagram-qr.png                 # Instagram QR
 ├── notion-qr.jpg                    # Notion QR
-└── github-qr.jpg                    # GitHub QR
+├── github-portfolio-qr.png          # GitHub 저장소 QR
+├── portfolio-hero.jpg               # README Hero 화면
+├── portfolio-projects.jpg           # README 프로젝트 화면
+├── portfolio-character.jpg          # README 캐릭터 화면
+└── repository-structure.png         # GitHub 저장소 구조 캡처
 ```
 
 <details>
   <summary><strong>GitHub 저장소 구조 캡처 보기</strong></summary>
   <br />
-  <img src="./docs/images/repository-structure.png" alt="포트폴리오 GitHub 저장소 폴더 구조" width="750" />
+  <img src="./repository-structure.png" alt="포트폴리오 GitHub 저장소 폴더 구조" width="750" />
 </details>
 
 ## 🛠️ 기술 스택
