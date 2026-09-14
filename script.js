@@ -69,6 +69,18 @@ if(sectionTitles.length&&!reducedMotion.matches){
 }
 
 
+// Design Process: reveal the heading, arrange cards in reading order, then draw the summary.
+const processSection=document.querySelector('#design-system');
+if(processSection&&!reducedMotion.matches){
+  processSection.classList.add('process-ready');
+  const processObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    processSection.classList.add('is-arranged');
+    processObserver.disconnect();
+  }),{threshold:.2,rootMargin:'0px 0px -8% 0px'});
+  processObserver.observe(processSection);
+}
+
 // AI workflow: sequential reveal, cursor spotlight, and AI/ME role emphasis.
 const workflowGrid=document.querySelector('.ai-workflow-grid');
 if(workflowGrid){
