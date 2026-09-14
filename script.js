@@ -56,6 +56,19 @@ if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){gsap.re
 const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 
+// Reveal the three major section headings once as they enter the viewport.
+const sectionTitles=[...document.querySelectorAll('.section-title')];
+if(sectionTitles.length&&!reducedMotion.matches){
+  document.documentElement.classList.add('js-motion');
+  const titleObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    entry.target.classList.add('is-visible');
+    titleObserver.unobserve(entry.target);
+  }),{threshold:.28,rootMargin:'0px 0px -10% 0px'});
+  sectionTitles.forEach(title=>titleObserver.observe(title));
+}
+
+
 // AI workflow: sequential reveal, cursor spotlight, and AI/ME role emphasis.
 const workflowGrid=document.querySelector('.ai-workflow-grid');
 if(workflowGrid){
