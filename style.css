@@ -106,3 +106,29 @@
 
 /* AI Workflow title accent follows the shared section-heading motion system. */
 .js-motion .section-title--ai.is-visible .section-title-accent:after{animation:section-accent-grow .58s .72s cubic-bezier(.2,.72,.24,1) forwards}
+
+/* Contact sequence: sentence-by-sentence title, CTA, then social cards */
+.js-motion .section-title--contact.is-visible .section-title-accent:after{animation:section-accent-grow .58s .72s cubic-bezier(.2,.72,.24,1) forwards}
+.js-motion #contact.contact-sequence-ready>p:not(.qr-scan-hint),
+.js-motion #contact.contact-sequence-ready>.contact-email-button,
+.js-motion #contact.contact-sequence-ready .social-connect,
+.js-motion #contact.contact-sequence-ready>.qr-scan-hint{opacity:0;translate:0 20px}
+.js-motion #contact.contact-sequence-ready .social-connect{scale:.98}
+.js-motion #contact.contact-sequenced>p:not(.qr-scan-hint){animation:contact-item-arrive .52s .46s cubic-bezier(.2,.72,.24,1) forwards}
+.js-motion #contact.contact-sequenced>.contact-email-button{animation:contact-item-arrive .56s .62s cubic-bezier(.2,.72,.24,1) forwards}
+.js-motion #contact.contact-sequenced .social-connect{animation:contact-card-arrive .6s cubic-bezier(.2,.72,.24,1) forwards}
+.js-motion #contact.contact-sequenced .social-connect:nth-child(1){animation-delay:.84s}
+.js-motion #contact.contact-sequenced .social-connect:nth-child(2){animation-delay:1s}
+.js-motion #contact.contact-sequenced .social-connect:nth-child(3){animation-delay:1.16s}
+.js-motion #contact.contact-sequenced>.qr-scan-hint{animation:contact-item-arrive .52s 1.34s cubic-bezier(.2,.72,.24,1) forwards}
+@keyframes contact-item-arrive{to{opacity:1;translate:0 0}}
+@keyframes contact-card-arrive{to{opacity:1;translate:0 0;scale:1}}
+@media(max-width:600px){
+.js-motion #contact.contact-sequence-ready>p:not(.qr-scan-hint),
+.js-motion #contact.contact-sequence-ready>.contact-email-button,
+.js-motion #contact.contact-sequence-ready .social-connect,
+.js-motion #contact.contact-sequence-ready>.qr-scan-hint{translate:0 14px}
+}
+@media(prefers-reduced-motion:reduce){
+#contact>p,#contact .contact-email-button,#contact .social-connect{opacity:1!important;translate:none!important;scale:1!important;animation:none!important}
+}

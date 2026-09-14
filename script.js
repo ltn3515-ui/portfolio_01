@@ -106,6 +106,18 @@ if(workflowGrid&&workflowSection){
   }
 }
 
+// Contact: reveal two title sentences, CTA, and social cards once on scroll.
+const contactSection=document.querySelector('#contact');
+if(contactSection&&!reducedMotion.matches){
+  contactSection.classList.add('contact-sequence-ready');
+  const contactObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    contactSection.classList.add('contact-sequenced');
+    contactObserver.disconnect();
+  }),{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+  contactObserver.observe(contactSection);
+}
+
 // Desktop custom cursor and subtle card tilt interaction.
 if(finePointer.matches&&!reducedMotion.matches){
   const cursor=document.createElement('div');
