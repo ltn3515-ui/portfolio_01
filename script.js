@@ -81,18 +81,21 @@ if(processSection&&!reducedMotion.matches){
   processObserver.observe(processSection);
 }
 
-// AI workflow: sequential reveal, cursor spotlight, and AI/ME role emphasis.
+// AI workflow: heading, intro, cards, principle, cursor spotlight, and role emphasis.
 const workflowGrid=document.querySelector('.ai-workflow-grid');
-if(workflowGrid){
+const workflowSection=document.querySelector('#ai-workflow');
+if(workflowGrid&&workflowSection){
   const workflowCards=[...workflowGrid.querySelectorAll('article')];
   if(!reducedMotion.matches){
+    workflowSection.classList.add('is-sequence-ready');
     workflowGrid.classList.add('is-ready');
     const revealWorkflow=new IntersectionObserver(entries=>entries.forEach(entry=>{
       if(!entry.isIntersecting)return;
-      workflowCards.forEach((card,index)=>setTimeout(()=>card.classList.add('is-revealed'),index*100));
+      workflowSection.classList.add('is-sequenced');
+      workflowCards.forEach((card,index)=>setTimeout(()=>card.classList.add('is-revealed'),650+index*120));
       revealWorkflow.disconnect();
-    }),{threshold:.18});
-    revealWorkflow.observe(workflowGrid);
+    }),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    revealWorkflow.observe(workflowSection);
   }
   if(finePointer.matches){
     workflowCards.forEach(card=>card.addEventListener('pointermove',event=>{

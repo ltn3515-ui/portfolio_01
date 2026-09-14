@@ -155,3 +155,20 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
   .ai-workflow-grid.is-ready article { opacity: 1; transform: none; }
   .ai-workflow-grid article, .ai-workflow-grid article::before, .ai-workflow-grid small i { transition: none; }
 }
+
+/* AI Workflow sequence: heading, intro, six cards, final principle */
+.ai-workflow.is-sequence-ready .ai-workflow-intro,
+.ai-workflow.is-sequence-ready .ai-principle{opacity:0}
+.ai-workflow.is-sequence-ready .ai-workflow-intro{transform:translateY(20px)}
+.ai-workflow.is-sequence-ready.is-sequenced .ai-workflow-intro{animation:ai-intro-arrive .58s .42s cubic-bezier(.2,.72,.24,1) forwards}
+.ai-workflow.is-sequence-ready .ai-principle{transform:translateY(18px)}
+.ai-workflow.is-sequence-ready.is-sequenced .ai-principle{animation:ai-principle-arrive .62s 1.62s cubic-bezier(.2,.72,.24,1) forwards}
+.ai-workflow-grid.is-ready article{transform:translateY(24px) scale(.98)}
+.ai-workflow-grid.is-ready article.is-revealed{transform:translateY(0) scale(1);transition:opacity .58s ease,transform .58s cubic-bezier(.2,.8,.2,1),border-color .32s,box-shadow .32s}
+.ai-workflow-grid.is-ready article.is-revealed:hover{transform:translateY(-6px) scale(1)}
+@keyframes ai-intro-arrive{to{opacity:1;transform:translateY(0)}}
+@keyframes ai-principle-arrive{to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.ai-workflow.is-sequence-ready .ai-workflow-intro{transform:translateY(14px)}}
+@media(prefers-reduced-motion:reduce){
+.ai-workflow-intro,.ai-workflow-grid article,.ai-principle{opacity:1!important;transform:none!important;animation:none!important}
+}

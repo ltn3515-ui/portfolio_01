@@ -103,3 +103,6 @@
 #design-system .board article,#design-system .process-summary{opacity:1!important;transform:none!important;clip-path:none!important;animation:none!important}
 #design-system .colors i{transform:none!important;animation:none!important}
 }
+
+/* AI Workflow title accent follows the shared section-heading motion system. */
+.js-motion .section-title--ai.is-visible .section-title-accent:after{animation:section-accent-grow .58s .72s cubic-bezier(.2,.72,.24,1) forwards}
