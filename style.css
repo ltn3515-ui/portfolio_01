@@ -25,3 +25,19 @@
 .social-connect:hover .social-qr-media,.social-connect:focus-visible .social-qr-media{transform:scale(1.065) rotate(-1deg);filter:drop-shadow(0 9px 12px rgba(23,24,21,.18))}
 .qr-scan-hint{margin:16px 0 0;text-align:center;color:var(--muted);font-size:13px;font-weight:700;letter-spacing:.01em}
 @media(prefers-reduced-motion:reduce){.social-qr-media,.social-connect{transition:none!important}.social-connect:hover .social-qr-media,.social-connect:focus-visible .social-qr-media{transform:none}}
+
+/* Hero headline: sequential line reveal on the first page load */
+.hero-title{overflow:visible}
+.hero-title-line{display:block;opacity:0;transform:translateY(34px);clip-path:inset(0 0 100% 0);animation:hero-line-reveal .72s cubic-bezier(.2,.72,.24,1) forwards;will-change:transform,opacity,clip-path}
+.hero-title-line:nth-child(1){animation-delay:.18s}
+.hero-title-line:nth-child(2){animation-delay:.42s}
+.hero-title-line:nth-child(3){animation-delay:.66s}
+.hero-title-line--accent{position:relative;width:max-content;max-width:100%}
+.hero-title-line--accent:after{content:"";position:absolute;left:0;bottom:-.04em;width:100%;height:.07em;border-radius:999px;background:currentColor;transform:scaleX(0);transform-origin:left;opacity:.26;animation:hero-accent-line .62s .9s cubic-bezier(.2,.72,.24,1) forwards}
+@keyframes hero-line-reveal{to{opacity:1;transform:translateY(0);clip-path:inset(0 0 0 0)}}
+@keyframes hero-accent-line{to{transform:scaleX(1)}}
+@media(max-width:600px){.hero-title-line{transform:translateY(22px)}}
+@media(prefers-reduced-motion:reduce){
+.hero-title-line{opacity:1!important;transform:none!important;clip-path:none!important}
+.hero-title-line--accent:after{transform:scaleX(1)!important}
+}
