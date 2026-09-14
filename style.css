@@ -107,6 +107,15 @@
 /* AI Workflow title accent follows the shared section-heading motion system. */
 .js-motion .section-title--ai.is-visible .section-title-accent:after{animation:section-accent-grow .58s .72s cubic-bezier(.2,.72,.24,1) forwards}
 
+/* Keep both Contact headline lines centered by their own text width. */
+.section-title--contact{width:100%;text-align:center}
+.section-title--contact .section-title-line{width:max-content;max-width:100%;margin-inline:auto;text-align:center}
+.section-title--contact .section-title-accent:after{left:0;width:100%}
+@media(max-width:600px){
+.section-title--contact .section-title-line{width:100%}
+.section-title--contact .section-title-accent:after{left:8%;width:84%}
+}
+
 /* Contact sequence: sentence-by-sentence title, CTA, then social cards */
 .js-motion .section-title--contact.is-visible .section-title-accent:after{animation:section-accent-grow .58s .72s cubic-bezier(.2,.72,.24,1) forwards}
 .js-motion #contact.contact-sequence-ready>p:not(.qr-scan-hint),
