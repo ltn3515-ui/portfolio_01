@@ -106,6 +106,36 @@ if(workflowGrid&&workflowSection){
   }
 }
 
+// Add an accessible centered play button while preserving native media controls.
+document.querySelectorAll('video').forEach((video,index)=>{
+  if(video.closest('.video-player'))return;
+  const player=document.createElement('div');
+  player.className='video-player';
+  video.parentNode.insertBefore(player,video);
+  player.appendChild(video);
+  if(!video.id)video.id=`portfolio-video-${index+1}`;
+  const playButton=document.createElement('button');
+  playButton.className='video-play-button';
+  playButton.type='button';
+  playButton.setAttribute('aria-label','영상 재생');
+  playButton.setAttribute('aria-controls',video.id);
+  player.appendChild(playButton);
+  const syncPlayState=()=>{
+    const playing=!video.paused&&!video.ended;
+    player.classList.toggle('is-playing',playing);
+    playButton.hidden=false;
+  };
+  playButton.addEventListener('click',async()=>{
+    try{await video.play()}catch(error){syncPlayState()}
+  });
+  video.addEventListener('play',syncPlayState);
+  video.addEventListener('playing',syncPlayState);
+  video.addEventListener('pause',syncPlayState);
+  video.addEventListener('ended',syncPlayState);
+  video.addEventListener('loadeddata',syncPlayState);
+  syncPlayState();
+});
+
 // Contact: reveal two title sentences, CTA, and social cards once on scroll.
 const contactSection=document.querySelector('#contact');
 if(contactSection&&!reducedMotion.matches){

@@ -132,3 +132,15 @@
 @media(prefers-reduced-motion:reduce){
 #contact>p,#contact .contact-email-button,#contact .social-connect{opacity:1!important;translate:none!important;scale:1!important;animation:none!important}
 }
+
+/* Accessible centered play control for every portfolio video */
+.video-player{position:relative;width:100%;overflow:hidden;background:#111}
+.video-player>video{display:block}
+.video-play-button{position:absolute;z-index:4;left:50%;top:50%;width:68px;height:68px;display:grid;place-items:center;padding:0;border:1px solid rgba(255,255,255,.72);border-radius:50%;background:rgba(23,24,21,.82);box-shadow:0 12px 30px rgba(0,0,0,.28),0 0 0 8px rgba(255,255,255,.12);translate:-50% -50%;cursor:pointer;transition:transform .25s ease,opacity .22s ease,background .25s ease,box-shadow .25s ease}
+.video-play-button:before{content:"";width:0;height:0;margin-left:5px;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:16px solid #fff}
+.video-play-button:hover,.video-play-button:focus-visible{transform:scale(1.1);background:var(--blue);box-shadow:0 14px 34px rgba(0,0,0,.32),0 0 0 10px rgba(47,107,255,.2)}
+.video-player.is-playing .video-play-button{opacity:0;pointer-events:none;transform:scale(.82)}
+.video-player:not(.is-playing) .video-play-button{animation:video-play-pulse 2.2s ease-in-out infinite}
+@keyframes video-play-pulse{50%{box-shadow:0 12px 30px rgba(0,0,0,.28),0 0 0 14px rgba(255,255,255,.05)}}
+@media(max-width:600px){.video-play-button{width:54px;height:54px}.video-play-button:before{border-top-width:8px;border-bottom-width:8px;border-left-width:13px}}
+@media(prefers-reduced-motion:reduce){.video-play-button{animation:none!important;transition:none!important}}
