@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ViewLight 데스크톱과 모바일 반응형 화면 비교"><title>ViewLight | 반응형 화면 비교</title>
+<style>
+:root{--bg:#f7f3ec;--panel:#fff;--ink:#171715;--muted:#6e6a63;--line:#ddd5ca;--accent:#ffb32c}*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+body{padding:24px}header{max-width:1800px;margin:0 auto 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px}.brand i{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px #ffe9bd}
+h1{margin:0;font-size:clamp(20px,2vw,32px);letter-spacing:-.04em}header p{margin:5px 0 0;color:var(--muted);font-size:14px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.actions a{border:1px solid var(--ink);border-radius:999px;padding:10px 16px;text-decoration:none;color:var(--ink);font-size:13px;font-weight:700;background:#fff}.actions a.primary{background:var(--ink);color:#fff}
+.viewer{max-width:1800px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:24px;align-items:start}.device-label{margin:0 0 10px;font-size:12px;font-weight:800;letter-spacing:.12em;text-align:center;color:var(--muted)}
+.browser,.phone{background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(36,30,20,.10);overflow:hidden}.browser{border-radius:22px}
+.browser-bar{height:52px;display:flex;align-items:center;gap:8px;padding:0 16px;background:#fff;border-bottom:1px solid var(--line)}.dot{width:11px;height:11px;border-radius:50%;background:#ff8e9b}.dot:nth-child(2){background:#ffd36e}.dot:nth-child(3){background:#87dbb8}
+.address{margin-left:8px;flex:1;background:#f3f1ee;border-radius:9px;padding:8px 12px;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browser iframe{display:block;width:100%;height:calc(100vh - 155px);min-height:680px;border:0;background:#fff}.mobile-wrap{position:sticky;top:20px}
+.phone{width:390px;max-width:100%;margin:auto;border:12px solid #171715;border-radius:45px;position:relative}.phone:before{content:"";position:absolute;z-index:2;top:0;left:50%;transform:translateX(-50%);width:128px;height:25px;background:#171715;border-radius:0 0 18px 18px}
+.phone iframe{display:block;width:100%;height:calc(100vh - 130px);min-height:680px;border:0;background:#fff;border-radius:31px}.notice{max-width:1800px;margin:18px auto 0;padding:12px 16px;border:1px solid #ead2a6;background:#fff8e9;border-radius:12px;color:#715a31;font-size:12px;line-height:1.6}
+@media(max-width:1100px){.viewer{grid-template-columns:1fr}.mobile-wrap{position:static}.phone iframe{height:760px}.browser iframe{height:720px}}
+@media(max-width:640px){body{padding:14px}header{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions a{flex:1;text-align:center}.browser iframe{height:650px;min-height:0}.phone{width:360px}.phone iframe{height:700px;min-height:0}}
+</style></head><body>
+<header><div class="brand"><i aria-hidden="true"></i><div><h1>ViewLight 반응형 화면 비교</h1><p>하나의 서비스를 데스크톱과 모바일 화면에서 동시에 확인합니다.</p></div></div><nav class="actions" aria-label="페이지 이동"><a href="./">← 포트폴리오</a><a class="primary" href="https://viewlight.vercel.app/" target="_blank" rel="noopener">ViewLight 새 창 ↗</a></nav></header>
+<main class="viewer"><section aria-labelledby="desktop-label"><h2 id="desktop-label" class="device-label">DESKTOP</h2><div class="browser"><div class="browser-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="address">viewlight.vercel.app</span></div><iframe src="https://viewlight.vercel.app/" title="ViewLight 데스크톱 화면" loading="eager"></iframe></div></section>
+<section class="mobile-wrap" aria-labelledby="mobile-label"><h2 id="mobile-label" class="device-label">MOBILE</h2><div class="phone"><iframe src="https://viewlight.vercel.app/" title="ViewLight 모바일 화면" loading="eager"></iframe></div></section></main>
+<p class="notice">일부 브라우저의 보안 설정이나 서비스 정책에 따라 미리보기가 제한될 수 있습니다. 그 경우 상단의 ‘ViewLight 새 창’ 버튼을 이용해 주세요.</p>
+</body></html>
